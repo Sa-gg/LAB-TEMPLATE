@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store and Display Form Data</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User Information Form</h2>
+
+    <form id="userForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+
+      <button type="submit">Add to List</button>
+    </form>
+
+    <h2>Stored Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- Data will be inserted here dynamically -->
+      </tbody>
+    </table>
+
+    <script>
+      // Array to store user objects
+      const users = [];
+      // Select form and table body
+      const form = document.getElementById("userForm");
+      const tableBody = document.getElementById("userTableBody");
+
+      // Handle form submission
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from reloading
+
+        // Get input values
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const email = document.getElementById("email").value;
+
+        // Create an object and store in the array
+        const user = { name, age, email };
+        users.push(user);
+
+        // Update the table
+        displayUsers();
+
+        // Clear form fields
+        form.reset();
+      });
+
+      // Function to display users in the table
+      function displayUsers() {
+        tableBody.innerHTML = ""; // Clear previous table data
+
+        users.forEach((user, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.age}</td>
+                    <td>${user.email}</td>
+                `;
+          tableBody.appendChild(row);
+        });
+      }
+    </script>
+  </body>
+</html>

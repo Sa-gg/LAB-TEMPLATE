@@ -1,0 +1,16 @@
+<form id="myForm">
+    <input type="text" id="nameInput" placeholder="Enter your name" required />
+    <button type="submit">Submit</button>
+</form>
+<p id="greeting"></p>
+
+<script>
+const form = document.getElementById("myForm");
+const nameInput = document.getElementById("nameInput");
+const greeting = document.getElementById("greeting");
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevents form from reloading the page
+    greeting.textContent = `Hello, ${nameInput.value}!`;
+});
+</script>
